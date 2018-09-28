@@ -1,0 +1,103 @@
+vendors = official
+
+txtColor = #eee
+opacityTab = 0.9 // 一级标签透明度
+opacityTab2 = 0.8 // 二级标签透明度
+bgcolor = rgba(0, 0, 0, opacityTab) // 弹出一级标签的背景色(带透明度)
+bgcolor2 = rgba(0, 0, 0, opacityTab2) // 弹出二级标签的背景色(带透明度)
+bgColor = #000 // 弹出一级标签的背景色
+bgColor2 = #000 // 弹出二级标签的背景色
+tabAnimationDuration = 500ms // 顶部和底部动画时间
+tabMiddleAnimationDuration = 1s // 中间动画时间
+maskColor = rgba(0, 0, 0, 0.1) // 背景遮罩初值
+
+.hover-red
+  background-color rgba(234, 81, 72,0.5)
+.hover-dark
+  background-color rgba(100 ,100 ,100 ,0.3)
+.hover
+  background-color rgba(255,255,255,0.7)
+
+// 上下方向弹出动画
+keyframe($name, $colorFom, $colorTo, $widthFrom, $widthTo, $heightFrom, $heightTo, $opacityFrom, $opacityTo)
+  @keyframes $name
+    from
+      background-color $colorFom
+      opacity $opacityFrom
+      height $heightFrom
+      width $widthFrom
+    to
+      background-color $colorTo
+      opacity $opacityTo
+      height $heightTo
+      width $widthTo
+
+keyframeS($name, $colorFom, $colorTo, $heightFrom, $heightTo, $opacityFrom, $opacityTo)
+  @keyframes $name
+    0%
+      background-color $colorFom
+      opacity $opacityFrom
+      height $heightFrom
+    50%
+      background-color $colorTo
+      opacity 0
+      height $heightTo
+    100%
+      background-color $colorTo
+      opacity $opacityTo
+      height $heightTo
+
+// 左右方向弹出动画
+keyframeNo($name, $colorFom, $colorTo, $widthFrom, $widthTo, $opacityFrom, $opacityTo)
+  @keyframes $name
+    from
+      background-color $colorFom
+      opacity $opacityFrom
+      width $widthFrom
+    to
+      background-color $colorTo
+      opacity $opacityTo
+      width $widthTo
+
+// 具体动画函数
+show($color, $height)
+  keyframe('tab-show', #000, $color, 100%, 100%, 0, $height, 0, opacityTab)
+  animation tab-show tabAnimationDuration ease
+
+hide($color, $height)
+  keyframe('tab-hide', $color, #000, 100%, 100%, $height, 0, opacityTab, 0)
+  animation tab-hide tabAnimationDuration ease
+
+// 二级标签动画
+show2($height)
+  keyframe('tab-show2', #000, #000, 100%, 100%, 0, $height, 0, opacityTab2)
+  animation tab-show2 tabAnimationDuration ease
+
+hide2($height)
+  keyframe('tab-hide2', #000, #000, 100%, 100%, $height, 0, opacityTab2, 0)
+  animation tab-hide2 tabAnimationDuration ease
+
+showLeft()
+  keyframeNo('left-show', #000, #000, 0, 100%, 0, opacityTab2)
+  animation left-show tabMiddleAnimationDuration ease
+
+hideLeft()
+  keyframeNo('left-hide', #000, #000, 100%, 0, opacityTab2, 0)
+  animation left-hide tabMiddleAnimationDuration ease
+
+// 底部标签其他按钮
+tabBtnHide()
+  @keyframes hideTabBtn
+    from
+      transform rotateX(0)
+    to
+      transform rotateX(90deg)
+  animation hideTabBtn tabAnimationDuration ease
+
+tabBtnShow()
+  @keyframes showTabBtn
+    from
+      transform rotateX(90deg)
+    to
+      transform rotateX(0)
+  animation showTabBtn tabAnimationDuration ease
