@@ -10,7 +10,7 @@
 	"miniprogramRoot": "./dist/",
 	"qcloudRoot": "./server/",
 	"compileType": "miniprogram",
-	"appid": "wxb661d4aa7ec73e5c",
+	"appid": "",
 	"projectname": "bednovel",
 	"libVersion": "2.1.1",
 	"condition": {
